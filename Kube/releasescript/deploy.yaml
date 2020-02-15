@@ -2,13 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: app-dev
-  name: aks-demo-web-deployment
+  name: aks-exam-deployment
 spec:
   replicas: 1
   revisionHistoryLimit: 1
   selector:
     matchLabels:     
-      app.kubernetes.io/name: aks-demo-web
+      app.kubernetes.io/name: aks-exam
       app.kubernetes.io/instance: app-dev
       app.kubernetes.io/part-of: aks-services
       app.kubernetes.io/managed-by: azure-devops
@@ -21,15 +21,15 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: aks-demo-web
+        app.kubernetes.io/name: aks-exam
         app.kubernetes.io/instance: app-dev
-        app.kubernetes.io/version: "#{Release.Artifacts.AksDemo.BuildNumber}#"    
+        app.kubernetes.io/version: "#{Release.Artifacts.aks.BuildNumber}#"    
         app.kubernetes.io/part-of: aks-services
         app.kubernetes.io/managed-by: azure-devops
     spec:
       containers:
-      - name: aks-demo-web
-        image: faisalacr.azurecr.io/aks-web:#{Release.Artifacts.AksDemo.BuildNumber}#
+      - name: aks-exam
+        image: faisalacr.azurecr.io/aks-web:#{Release.Artifacts.aks.BuildNumber}#
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
@@ -43,11 +43,11 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: app-dev
-  name: aks-demo-web-service
+  name: aks-exam-service
   labels:
-    app.kubernetes.io/name: aks-demo-web
+    app.kubernetes.io/name: aks-exam
     app.kubernetes.io/instance: app-dev
-    app.kubernetes.io/version: "#{Release.Artifacts.AksDemo.BuildNumber}#"    
+    app.kubernetes.io/version: "#{Release.Artifacts.aks.BuildNumber}#"    
     app.kubernetes.io/part-of: aks-services
     app.kubernetes.io/managed-by: azure-devops
 spec:
@@ -56,9 +56,9 @@ spec:
   - protocol: TCP
     port: 80
   selector:
-    app.kubernetes.io/name: aks-demo-web
+    app.kubernetes.io/name: aks-exam
     app.kubernetes.io/instance: app-dev
-    app.kubernetes.io/version: "#{Release.Artifacts.AksDemo.BuildNumber}#"    
+    app.kubernetes.io/version: "#{Release.Artifacts.aks.BuildNumber}#"    
     app.kubernetes.io/part-of: aks-services
     app.kubernetes.io/managed-by: azure-devops
 ---
@@ -66,22 +66,22 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   namespace: app-dev
-  name: aks-demo-web-ingress
+  name: aks-exam-ingress
   annotations:
     kubernetes.io/ingress.class: nginx    
     nginx.org/server-snippets: "gzip on;"
-#    cert-manager.io/cluster-issuer: letsencrypt-prod    
-#    nginx.ingress.kubernetes.io/ssl-redirect: "true"    
-spec:  
-#  tls:
-#  - hosts:
-    #- app-staging.informatiq.no
-#    secretName: app-staging-informatiq-no-cert-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"    
+spec: 
+  tls:
+  - hosts:
+    - amin27.eastus.cloudapp.azure.com
+    secretName: amin27-eastus-cloudapp-azure-com-staging
   rules:
-  - host: faisaldns.eastus.cloudapp.azure.com
+  - host: amin27.eastus.cloudapp.azure.com
     http:
       paths:           
       - path: /
         backend:
-          serviceName: aks-demo-web-service
+          serviceName: aks-exam-service
           servicePort: 80
