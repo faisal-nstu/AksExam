@@ -17,7 +17,7 @@ steps:
 - script: sudo service docker status
   displayName: 'docker status'
 
-- script: docker-compose -f docker-compose.yml -f docker-compose.override.yml build .
+- script: docker-compose -f docker-compose.yml -f docker-compose.override.yml build
   displayName: 'docker-compose build'
 
 - script: |
