@@ -81,7 +81,7 @@ spec:
   - host: amin27.eastus.cloudapp.azure.com
     http:
       paths:           
-      - path: /
+      - path: /(.*)
         backend:
           serviceName: aks-exam-service
           servicePort: 80
