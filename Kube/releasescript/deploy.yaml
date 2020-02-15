@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: aks-exam
-        image: sufian.azurecr.io/aks-web:#{Release.Artifacts.AksExam.BuildNumber}#
+        image: sufian.azurecr.io/aks-helloworldnode:#{Release.Artifacts.AksExam.BuildNumber}#
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
@@ -70,18 +70,18 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx    
     nginx.org/server-snippets: "gzip on;"
-    cert-manager.io/cluster-issuer: letsencrypt-staging    
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"    
+#    cert-manager.io/cluster-issuer: letsencrypt-prod    
+#    nginx.ingress.kubernetes.io/ssl-redirect: "true"    
 spec:  
- tls:
- - hosts:
-    - amin27.eastus.cloudapp.azure.com
-   secretName: amin27-eastus-cloudapp-azure-com-staging
+#  tls:
+#  - hosts:
+    #- app-staging.informatiq.no
+#    secretName: app-staging-informatiq-no-cert-prod
   rules:
   - host: amin27.eastus.cloudapp.azure.com
     http:
       paths:           
-      - path: /home
+      - path: /
         backend:
           serviceName: aks-exam-service
           servicePort: 80
