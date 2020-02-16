@@ -28,7 +28,7 @@ spec:
         app.kubernetes.io/managed-by: azure-devops
     spec:
       containers:
-        - name: aks-hellonode
+        - name: aksexam
           image: faisalacr.azurecr.io/aksexam:#{Release.Artifacts.AksExam.BuildNumber}#
           env:
             - name: ASPNETCORE_ENVIRONMENT
