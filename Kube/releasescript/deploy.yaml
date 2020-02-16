@@ -75,10 +75,10 @@ metadata:
 spec:
   # tls:
     # - hosts:
-        # - aminbs23-website.eastus2.cloudapp.azure.com
+        # - aminbs23.eastus2.cloudapp.azure.com
       # secretName: aminbs23-eastus-cloudapp-azure-com-staging
   rules:
-    - host: aminbs23-website.eastus2.cloudapp.azure.com
+    - host: aminbs23.eastus2.cloudapp.azure.com
       http:
         paths:
           - path: /(.*)
