@@ -32,7 +32,7 @@ spec:
           image: faisalacr.azurecr.io/aksexam:#{Release.Artifacts.AksExam.BuildNumber}#
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: "Production"
+              value: "Development"
           ports:
             - containerPort: 80
           imagePullPolicy: Always
