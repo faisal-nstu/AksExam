@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "K8SExam": {
+    "AksExam": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
