@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - sufian.eastus.cloudapp.azure.com
-    secretName: sufian-eastus-cloudapp-azure-com-staging
+    - aminbs23-eastus2.cloudapp.azure.com
+    secretName: aminbs23-eastus2-cloudapp-azure-com-staging
   rules:
-  - host: sufian.eastus.cloudapp.azure.com
+  - host: aminbs23.eastus2.cloudapp.azure.com
     http:
       paths:
       - backend:
